@@ -10,5 +10,10 @@ CHIP Xor {
     OUT out;
 
     PARTS:
-    //// Replace this comment with your code.
+    // a xor b = (a or b) and (a nand b)
+    //         = (a nand n) nand (b nand n), where n = a nand
+    Nand(a=a, b=b, out=nab);
+    Nand(a=a, b=nab, out=an);
+    Nand(a=nab, b=b, out=bn);
+    Nand(a=an, b=bn, out=out);
 }
