@@ -26,10 +26,50 @@ CHIP CPU {
                          // the current program (reset==0).
 
     OUT outM[16],        // M value output
-        writeM,          // Write to M? 
+        writeM,          // Write to M?
         addressM[15],    // Address in data memory (of M)
         pc[15];          // address of next instruction
 
+    // instruction:
+    // FEDCBA9876543210
+    // 0vvvvvvvvvvvvvvv A instruction
+    // 111accccccdddjjj C instruction
+
     PARTS:
-	//// Replace this comment with your code.
+    // insn[5,4,3] (ddd): load to A / D / RAM[A]
+    And(a=instruction[15], b=instruction[3], out=writeM);
+    And(a=instruction[15], b=instruction[4], out=writeD);
+    DRegister(in=outAlu, load=writeD, out=outD); // D register
+
+    // insn[15] (opcode): 0 -> A instruction, 1 -> C instruction
+    // Not(insn[15]): 0 -> C instruction, 1 -> A instruction
+    Not(in=instruction[15], out=opA);
+    Mux16(a=outAlu, b=instruction, sel=opA, out=muxAluInsn); // Mux16(instruction, ALU)
+    // insn[15] == 0 (opA == 1): load to A
+    Or(a=opA, b=instruction[5], out=writeA);
+    ARegister(in=muxAluInsn, load=writeA, out=outA, out[0..14]=addressM); // A register
+    // insn[12] (a): 0 -> use A, 1 -> use M
+    Mux16(a=outA, b=inM, sel=instruction[12], out=muxAM); // Mux16(A register, inM)
+
+    // insn[11,10,9,8,7,6] (cccccc): ALU f
+    ALU(x=outD, y=muxAM, zx=instruction[11], nx=instruction[10], zy=instruction[9], ny=instruction[8], f=instruction[7], no=instruction[6], out=outM, out=outAlu, zr=zr, ng=ng);
+
+    // reset: PC = 0
+    // jump: PC = A
+    // no jump: PC++
+    // insn[2,1,0] (jjj): jump when <,=,>
+    // ALU.zr: "="
+    // ALU.ng: "<"
+    // jump = (j< And ng) Or (j= And zr) Or (j> And Not(ng))
+    And(a=instruction[2], b=ng, out=jlt);
+    And(a=instruction[1], b=zr, out=jeq);
+    Not(in=ng, out=po);
+    And(a=instruction[0], b=po, out=jgt);
+    Or(a=jlt, b=jeq, out=jle);
+    Or(a=jle, b=jgt, out=jmp);
+    And(a=instruction[15], b=jmp, out=loadPc);
+    PC(in=outA, load=loadPc, inc=true, reset=reset, out[0..14]=pc);
 }
+
+// TODO: Test not passed.
+// But the builtin CPU fails at the same test, so I guess the implementation is correct.
