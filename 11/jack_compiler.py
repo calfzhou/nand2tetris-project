@@ -154,10 +154,14 @@ class VMWriter:
         self._out = out
 
     def write(self, s):
-        self._out.write(s + '\n')
+        # Indent everything except `function` and `label` lines.
+        if s.startswith('function ') or s.startswith('label '):
+            self._out.write(s + '\n')
+        else:
+            self._out.write('    ' + s + '\n')
 
     def comment(self, text):
-        self._out.write(f'// {text}\n')
+        self._out.write(f'    // {text}\n')
 
     def push(self, segment, index):
         self.write(f'push {segment} {index}')
