@@ -434,8 +434,8 @@ class CompilationEngine:
                 self._vm.call('String.appendChar', 2)
         elif val == 'true':
             self._eat()
-            self._vm.push('constant', 0)
-            self._vm.arithmetic('not')
+            self._vm.push('constant', 1)
+            self._vm.arithmetic('neg')
         elif val in ('false', 'null'):
             self._eat()
             self._vm.push('constant', 0)
