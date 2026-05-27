@@ -141,7 +141,7 @@ function Ball.setDestination 3
     // if (invert)
     push this 7
     not
-    if-goto Ball.IF_ELSE_1
+    if-goto Ball.IF_ELSE_0
     // let temp = dx;
     push local 0
     pop local 2
@@ -161,8 +161,8 @@ function Ball.setDestination 3
     push argument 1
     lt
     pop this 9
-    goto Ball.IF_END_0
-label Ball.IF_ELSE_1
+    goto Ball.IF_END_1
+label Ball.IF_ELSE_0
     // let positivex = (x < destx);
     push this 0
     push argument 1
@@ -173,7 +173,7 @@ label Ball.IF_ELSE_1
     push argument 2
     lt
     pop this 9
-label Ball.IF_END_0
+label Ball.IF_END_1
     // let d = (2 * dy) - dx;
     push constant 2
     push local 1
@@ -209,14 +209,14 @@ function Ball.move 0
     push constant 0
     lt
     not
-    if-goto Ball.IF_ELSE_3
+    if-goto Ball.IF_ELSE_2
     // let d = d + straightD;
     push this 4
     push this 5
     add
     pop this 4
-    goto Ball.IF_END_2
-label Ball.IF_ELSE_3
+    goto Ball.IF_END_3
+label Ball.IF_ELSE_2
     // let d = d + diagonalD;
     push this 4
     push this 6
@@ -225,150 +225,150 @@ label Ball.IF_ELSE_3
     // if (positivey)
     push this 9
     not
-    if-goto Ball.IF_ELSE_5
+    if-goto Ball.IF_ELSE_4
     // if (invert)
     push this 7
     not
-    if-goto Ball.IF_ELSE_7
+    if-goto Ball.IF_ELSE_6
     // let x = x + 4;
     push this 0
     push constant 4
     add
     pop this 0
-    goto Ball.IF_END_6
-label Ball.IF_ELSE_7
+    goto Ball.IF_END_7
+label Ball.IF_ELSE_6
     // let y = y + 4;
     push this 1
     push constant 4
     add
     pop this 1
-label Ball.IF_END_6
-    goto Ball.IF_END_4
-label Ball.IF_ELSE_5
+label Ball.IF_END_7
+    goto Ball.IF_END_5
+label Ball.IF_ELSE_4
     // if (invert)
     push this 7
     not
-    if-goto Ball.IF_ELSE_9
+    if-goto Ball.IF_ELSE_8
     // let x = x - 4;
     push this 0
     push constant 4
     sub
     pop this 0
-    goto Ball.IF_END_8
-label Ball.IF_ELSE_9
+    goto Ball.IF_END_9
+label Ball.IF_ELSE_8
     // let y = y - 4;
     push this 1
     push constant 4
     sub
     pop this 1
-label Ball.IF_END_8
-label Ball.IF_END_4
-label Ball.IF_END_2
+label Ball.IF_END_9
+label Ball.IF_END_5
+label Ball.IF_END_3
     // if (positivex)
     push this 8
     not
-    if-goto Ball.IF_ELSE_11
+    if-goto Ball.IF_ELSE_10
     // if (invert)
     push this 7
     not
-    if-goto Ball.IF_ELSE_13
+    if-goto Ball.IF_ELSE_12
     // let y = y + 4;
     push this 1
     push constant 4
     add
     pop this 1
-    goto Ball.IF_END_12
-label Ball.IF_ELSE_13
+    goto Ball.IF_END_13
+label Ball.IF_ELSE_12
     // let x = x + 4;
     push this 0
     push constant 4
     add
     pop this 0
-label Ball.IF_END_12
-    goto Ball.IF_END_10
-label Ball.IF_ELSE_11
+label Ball.IF_END_13
+    goto Ball.IF_END_11
+label Ball.IF_ELSE_10
     // if (invert)
     push this 7
     not
-    if-goto Ball.IF_ELSE_15
+    if-goto Ball.IF_ELSE_14
     // let y = y - 4;
     push this 1
     push constant 4
     sub
     pop this 1
-    goto Ball.IF_END_14
-label Ball.IF_ELSE_15
+    goto Ball.IF_END_15
+label Ball.IF_ELSE_14
     // let x = x - 4;
     push this 0
     push constant 4
     sub
     pop this 0
-label Ball.IF_END_14
-label Ball.IF_END_10
+label Ball.IF_END_15
+label Ball.IF_END_11
     // if (~(x > leftWall))
     push this 0
     push this 10
     gt
     not
     not
-    if-goto Ball.IF_ELSE_17
+    if-goto Ball.IF_ELSE_16
     // let wall = 1;
     push constant 1
     pop this 14
     // let x = leftWall;
     push this 10
     pop this 0
-    goto Ball.IF_END_16
-label Ball.IF_ELSE_17
-label Ball.IF_END_16
+    goto Ball.IF_END_17
+label Ball.IF_ELSE_16
+label Ball.IF_END_17
     // if (~(x < rightWall))
     push this 0
     push this 11
     lt
     not
     not
-    if-goto Ball.IF_ELSE_19
+    if-goto Ball.IF_ELSE_18
     // let wall = 2;
     push constant 2
     pop this 14
     // let x = rightWall;
     push this 11
     pop this 0
-    goto Ball.IF_END_18
-label Ball.IF_ELSE_19
-label Ball.IF_END_18
+    goto Ball.IF_END_19
+label Ball.IF_ELSE_18
+label Ball.IF_END_19
     // if (~(y > topWall))
     push this 1
     push this 12
     gt
     not
     not
-    if-goto Ball.IF_ELSE_21
+    if-goto Ball.IF_ELSE_20
     // let wall = 3;
     push constant 3
     pop this 14
     // let y = topWall;
     push this 12
     pop this 1
-    goto Ball.IF_END_20
-label Ball.IF_ELSE_21
-label Ball.IF_END_20
+    goto Ball.IF_END_21
+label Ball.IF_ELSE_20
+label Ball.IF_END_21
     // if (~(y < bottomWall))
     push this 1
     push this 13
     lt
     not
     not
-    if-goto Ball.IF_ELSE_23
+    if-goto Ball.IF_ELSE_22
     // let wall = 4;
     push constant 4
     pop this 14
     // let y = bottomWall;
     push this 13
     pop this 1
-    goto Ball.IF_END_22
-label Ball.IF_ELSE_23
-label Ball.IF_END_22
+    goto Ball.IF_END_23
+label Ball.IF_ELSE_22
+label Ball.IF_END_23
     // do show();
     push pointer 0
     call Ball.show 1
@@ -395,12 +395,12 @@ function Ball.bounce 5
     push constant 0
     eq
     not
-    if-goto Ball.IF_ELSE_25
+    if-goto Ball.IF_ELSE_24
     // let factor = 10;
     push constant 10
     pop local 4
-    goto Ball.IF_END_24
-label Ball.IF_ELSE_25
+    goto Ball.IF_END_25
+label Ball.IF_ELSE_24
     // if (((~(lengthx < 0)) & (bouncingDirection = 1)) | ((lengthx < 0) & (bouncingDirection = (-1))))
     push this 2
     push constant 0
@@ -420,23 +420,23 @@ label Ball.IF_ELSE_25
     and
     or
     not
-    if-goto Ball.IF_ELSE_27
+    if-goto Ball.IF_ELSE_26
     // let factor = 20;
     push constant 20
     pop local 4
-    goto Ball.IF_END_26
-label Ball.IF_ELSE_27
+    goto Ball.IF_END_27
+label Ball.IF_ELSE_26
     // let factor = 5;
     push constant 5
     pop local 4
-label Ball.IF_END_26
-label Ball.IF_END_24
+label Ball.IF_END_27
+label Ball.IF_END_25
     // if (wall = 1)
     push this 14
     push constant 1
     eq
     not
-    if-goto Ball.IF_ELSE_29
+    if-goto Ball.IF_ELSE_28
     // let newx = 506;
     push constant 506
     pop local 0
@@ -455,14 +455,14 @@ label Ball.IF_END_24
     call Math.multiply 2
     add
     pop local 1
-    goto Ball.IF_END_28
-label Ball.IF_ELSE_29
+    goto Ball.IF_END_29
+label Ball.IF_ELSE_28
     // if (wall = 2)
     push this 14
     push constant 2
     eq
     not
-    if-goto Ball.IF_ELSE_31
+    if-goto Ball.IF_ELSE_30
     // let newx = 0;
     push constant 0
     pop local 0
@@ -480,14 +480,14 @@ label Ball.IF_ELSE_29
     call Math.multiply 2
     add
     pop local 1
-    goto Ball.IF_END_30
-label Ball.IF_ELSE_31
+    goto Ball.IF_END_31
+label Ball.IF_ELSE_30
     // if (wall = 3)
     push this 14
     push constant 3
     eq
     not
-    if-goto Ball.IF_ELSE_33
+    if-goto Ball.IF_ELSE_32
     // let newy = 250;
     push constant 250
     pop local 1
@@ -506,8 +506,8 @@ label Ball.IF_ELSE_31
     call Math.multiply 2
     add
     pop local 0
-    goto Ball.IF_END_32
-label Ball.IF_ELSE_33
+    goto Ball.IF_END_33
+label Ball.IF_ELSE_32
     // let newy = 0;
     push constant 0
     pop local 1
@@ -525,9 +525,9 @@ label Ball.IF_ELSE_33
     call Math.multiply 2
     add
     pop local 0
-label Ball.IF_END_32
-label Ball.IF_END_30
-label Ball.IF_END_28
+label Ball.IF_END_33
+label Ball.IF_END_31
+label Ball.IF_END_29
     // do setDestination(newx, newy);
     push pointer 0
     push local 0

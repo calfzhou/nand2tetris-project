@@ -44,7 +44,7 @@ label Main.WHILE_START_0
     gt
     not
     not
-    if-goto Main.IF_ELSE_3
+    if-goto Main.IF_ELSE_2
     // if (~((value & mask) = 0))
     push argument 0
     push local 0
@@ -53,7 +53,7 @@ label Main.WHILE_START_0
     eq
     not
     not
-    if-goto Main.IF_ELSE_5
+    if-goto Main.IF_ELSE_4
     // do Memory.poke(8000 + position, 1);
     push constant 8000
     push local 1
@@ -61,8 +61,8 @@ label Main.WHILE_START_0
     push constant 1
     call Memory.poke 2
     pop temp 0
-    goto Main.IF_END_4
-label Main.IF_ELSE_5
+    goto Main.IF_END_5
+label Main.IF_ELSE_4
     // do Memory.poke(8000 + position, 0);
     push constant 8000
     push local 1
@@ -70,13 +70,13 @@ label Main.IF_ELSE_5
     push constant 0
     call Memory.poke 2
     pop temp 0
-label Main.IF_END_4
-    goto Main.IF_END_2
-label Main.IF_ELSE_3
+label Main.IF_END_5
+    goto Main.IF_END_3
+label Main.IF_ELSE_2
     // let loop = false;
     push constant 0
     pop local 2
-label Main.IF_END_2
+label Main.IF_END_3
     goto Main.WHILE_START_0
 label Main.WHILE_END_1
     // return;
@@ -89,18 +89,18 @@ function Main.nextMask 0
     push constant 0
     eq
     not
-    if-goto Main.IF_ELSE_7
+    if-goto Main.IF_ELSE_6
     // return 1;
     push constant 1
     return
-    goto Main.IF_END_6
-label Main.IF_ELSE_7
+    goto Main.IF_END_7
+label Main.IF_ELSE_6
     // return mask * 2;
     push argument 0
     push constant 2
     call Math.multiply 2
     return
-label Main.IF_END_6
+label Main.IF_END_7
     // function void fillMemory(int address, int length, int value)
 function Main.fillMemory 0
     // while (length > 0)
