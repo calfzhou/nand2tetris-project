@@ -116,13 +116,13 @@ function PongGame.run 1
     push argument 0
     pop pointer 0
     // while (~exit)
-label PongGame_0
+label PongGame.WHILE_START_0
     push this 3
     not
     not
-    if-goto PongGame_1
+    if-goto PongGame.WHILE_END_1
     // while ((key = 0) & (~exit))
-label PongGame_2
+label PongGame.WHILE_START_2
     push local 0
     push constant 0
     eq
@@ -130,7 +130,7 @@ label PongGame_2
     not
     and
     not
-    if-goto PongGame_3
+    if-goto PongGame.WHILE_END_3
     // let key = Keyboard.keyPressed();
     call Keyboard.keyPressed 0
     pop local 0
@@ -146,51 +146,51 @@ label PongGame_2
     push constant 50
     call Sys.wait 1
     pop temp 0
-    goto PongGame_2
-label PongGame_3
+    goto PongGame.WHILE_START_2
+label PongGame.WHILE_END_3
     // if (key = 130)
     push local 0
     push constant 130
     eq
     not
-    if-goto PongGame_5
+    if-goto PongGame.IF_ELSE_5
     // do bat.setDirection(1);
     push this 0
     push constant 1
     call Bat.setDirection 2
     pop temp 0
-    goto PongGame_4
-label PongGame_5
+    goto PongGame.IF_END_4
+label PongGame.IF_ELSE_5
     // if (key = 132)
     push local 0
     push constant 132
     eq
     not
-    if-goto PongGame_7
+    if-goto PongGame.IF_ELSE_7
     // do bat.setDirection(2);
     push this 0
     push constant 2
     call Bat.setDirection 2
     pop temp 0
-    goto PongGame_6
-label PongGame_7
+    goto PongGame.IF_END_6
+label PongGame.IF_ELSE_7
     // if (key = 140)
     push local 0
     push constant 140
     eq
     not
-    if-goto PongGame_9
+    if-goto PongGame.IF_ELSE_9
     // let exit = true;
     push constant 1
     neg
     pop this 3
-    goto PongGame_8
-label PongGame_9
-label PongGame_8
-label PongGame_6
-label PongGame_4
+    goto PongGame.IF_END_8
+label PongGame.IF_ELSE_9
+label PongGame.IF_END_8
+label PongGame.IF_END_6
+label PongGame.IF_END_4
     // while ((~(key = 0)) & (~exit))
-label PongGame_10
+label PongGame.WHILE_START_10
     push local 0
     push constant 0
     eq
@@ -199,7 +199,7 @@ label PongGame_10
     not
     and
     not
-    if-goto PongGame_11
+    if-goto PongGame.WHILE_END_11
     // let key = Keyboard.keyPressed();
     call Keyboard.keyPressed 0
     pop local 0
@@ -215,14 +215,14 @@ label PongGame_10
     push constant 50
     call Sys.wait 1
     pop temp 0
-    goto PongGame_10
-label PongGame_11
-    goto PongGame_0
-label PongGame_1
+    goto PongGame.WHILE_START_10
+label PongGame.WHILE_END_11
+    goto PongGame.WHILE_START_0
+label PongGame.WHILE_END_1
     // if (exit)
     push this 3
     not
-    if-goto PongGame_13
+    if-goto PongGame.IF_ELSE_13
     // do Output.moveCursor(10,27);
     push constant 10
     push constant 27
@@ -251,9 +251,9 @@ label PongGame_1
     call String.appendChar 2
     call Output.printString 1
     pop temp 0
-    goto PongGame_12
-label PongGame_13
-label PongGame_12
+    goto PongGame.IF_END_12
+label PongGame.IF_ELSE_13
+label PongGame.IF_END_12
     // return;
     push constant 0
     return
@@ -275,7 +275,7 @@ function PongGame.moveBall 5
     not
     and
     not
-    if-goto PongGame_15
+    if-goto PongGame.IF_ELSE_15
     // let lastWall = wall;
     push this 2
     pop this 5
@@ -303,7 +303,7 @@ function PongGame.moveBall 5
     push constant 4
     eq
     not
-    if-goto PongGame_17
+    if-goto PongGame.IF_ELSE_17
     // let exit = (batLeft > ballRight) | (batRight < ballLeft);
     push local 1
     push local 4
@@ -317,7 +317,7 @@ function PongGame.moveBall 5
     push this 3
     not
     not
-    if-goto PongGame_19
+    if-goto PongGame.IF_ELSE_19
     // if (ballRight < (batLeft + 10))
     push local 4
     push local 1
@@ -325,13 +325,13 @@ function PongGame.moveBall 5
     add
     lt
     not
-    if-goto PongGame_21
+    if-goto PongGame.IF_ELSE_21
     // let bouncingDirection = -1;
     push constant 1
     neg
     pop local 0
-    goto PongGame_20
-label PongGame_21
+    goto PongGame.IF_END_20
+label PongGame.IF_ELSE_21
     // if (ballLeft > (batRight - 10))
     push local 3
     push local 2
@@ -339,14 +339,14 @@ label PongGame_21
     sub
     gt
     not
-    if-goto PongGame_23
+    if-goto PongGame.IF_ELSE_23
     // let bouncingDirection = 1;
     push constant 1
     pop local 0
-    goto PongGame_22
-label PongGame_23
-label PongGame_22
-label PongGame_20
+    goto PongGame.IF_END_22
+label PongGame.IF_ELSE_23
+label PongGame.IF_END_22
+label PongGame.IF_END_20
     // let batWidth = batWidth - 2;
     push this 6
     push constant 2
@@ -371,20 +371,20 @@ label PongGame_20
     push this 4
     call Output.printInt 1
     pop temp 0
-    goto PongGame_18
-label PongGame_19
-label PongGame_18
-    goto PongGame_16
-label PongGame_17
-label PongGame_16
+    goto PongGame.IF_END_18
+label PongGame.IF_ELSE_19
+label PongGame.IF_END_18
+    goto PongGame.IF_END_16
+label PongGame.IF_ELSE_17
+label PongGame.IF_END_16
     // do ball.bounce(bouncingDirection);
     push this 1
     push local 0
     call Ball.bounce 2
     pop temp 0
-    goto PongGame_14
-label PongGame_15
-label PongGame_14
+    goto PongGame.IF_END_14
+label PongGame.IF_ELSE_15
+label PongGame.IF_END_14
     // return;
     push constant 0
     return

@@ -25,10 +25,10 @@ function Main.convert 3
     neg
     pop local 2
     // while (loop)
-label Main_0
+label Main.WHILE_START_0
     push local 2
     not
-    if-goto Main_1
+    if-goto Main.WHILE_END_1
     // let position = position + 1;
     push local 1
     push constant 1
@@ -44,7 +44,7 @@ label Main_0
     gt
     not
     not
-    if-goto Main_3
+    if-goto Main.IF_ELSE_3
     // if (~((value & mask) = 0))
     push argument 0
     push local 0
@@ -53,7 +53,7 @@ label Main_0
     eq
     not
     not
-    if-goto Main_5
+    if-goto Main.IF_ELSE_5
     // do Memory.poke(8000 + position, 1);
     push constant 8000
     push local 1
@@ -61,8 +61,8 @@ label Main_0
     push constant 1
     call Memory.poke 2
     pop temp 0
-    goto Main_4
-label Main_5
+    goto Main.IF_END_4
+label Main.IF_ELSE_5
     // do Memory.poke(8000 + position, 0);
     push constant 8000
     push local 1
@@ -70,15 +70,15 @@ label Main_5
     push constant 0
     call Memory.poke 2
     pop temp 0
-label Main_4
-    goto Main_2
-label Main_3
+label Main.IF_END_4
+    goto Main.IF_END_2
+label Main.IF_ELSE_3
     // let loop = false;
     push constant 0
     pop local 2
-label Main_2
-    goto Main_0
-label Main_1
+label Main.IF_END_2
+    goto Main.WHILE_START_0
+label Main.WHILE_END_1
     // return;
     push constant 0
     return
@@ -89,27 +89,27 @@ function Main.nextMask 0
     push constant 0
     eq
     not
-    if-goto Main_7
+    if-goto Main.IF_ELSE_7
     // return 1;
     push constant 1
     return
-    goto Main_6
-label Main_7
+    goto Main.IF_END_6
+label Main.IF_ELSE_7
     // return mask * 2;
     push argument 0
     push constant 2
     call Math.multiply 2
     return
-label Main_6
+label Main.IF_END_6
     // function void fillMemory(int address, int length, int value)
 function Main.fillMemory 0
     // while (length > 0)
-label Main_8
+label Main.WHILE_START_8
     push argument 1
     push constant 0
     gt
     not
-    if-goto Main_9
+    if-goto Main.WHILE_END_9
     // do Memory.poke(address, value);
     push argument 0
     push argument 2
@@ -125,8 +125,8 @@ label Main_8
     push constant 1
     add
     pop argument 0
-    goto Main_8
-label Main_9
+    goto Main.WHILE_START_8
+label Main.WHILE_END_9
     // return;
     push constant 0
     return

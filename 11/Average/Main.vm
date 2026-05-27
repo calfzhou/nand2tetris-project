@@ -49,12 +49,12 @@ function Main.main 4
     push constant 0
     pop local 2
     // while (i < length)
-label Main_0
+label Main.WHILE_START_0
     push local 2
     push local 1
     lt
     not
-    if-goto Main_1
+    if-goto Main.WHILE_END_1
     // let a[i] = Keyboard.readInt("Enter a number: ");
     push local 2
     push local 0
@@ -112,8 +112,8 @@ label Main_0
     push constant 1
     add
     pop local 2
-    goto Main_0
-label Main_1
+    goto Main.WHILE_START_0
+label Main.WHILE_END_1
     // do Output.printString("The average is ");
     push constant 15
     call String.new 1

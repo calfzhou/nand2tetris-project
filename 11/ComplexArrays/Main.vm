@@ -428,7 +428,7 @@ function Main.main 3
     push constant 0
     eq
     not
-    if-goto Main_1
+    if-goto Main.IF_ELSE_1
     // do Main.fill(a, 10);
     push local 0
     push constant 10
@@ -492,9 +492,9 @@ function Main.main 3
     pop pointer 1
     push temp 0
     pop that 0
-    goto Main_0
-label Main_1
-label Main_0
+    goto Main.IF_END_0
+label Main.IF_ELSE_1
+label Main.IF_END_0
     // do Output.printString("Test 4: expected result: 77; actual result: ");
     push constant 44
     call String.new 1
@@ -718,12 +718,12 @@ function Main.double 0
     // function void fill(Array a, int size)
 function Main.fill 0
     // while (size > 0)
-label Main_2
+label Main.WHILE_START_2
     push argument 1
     push constant 0
     gt
     not
-    if-goto Main_3
+    if-goto Main.WHILE_END_3
     // let size = size - 1;
     push argument 1
     push constant 1
@@ -739,8 +739,8 @@ label Main_2
     pop pointer 1
     push temp 0
     pop that 0
-    goto Main_2
-label Main_3
+    goto Main.WHILE_START_2
+label Main.WHILE_END_3
     // return;
     push constant 0
     return
