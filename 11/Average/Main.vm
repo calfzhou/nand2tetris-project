@@ -1,4 +1,6 @@
+    // function void main()
 function Main.main 4
+    // let length = Keyboard.readInt("How many numbers? ");
     push constant 18
     call String.new 1
     push constant 72
@@ -39,17 +41,21 @@ function Main.main 4
     call String.appendChar 2
     call Keyboard.readInt 1
     pop local 1
+    // let a = Array.new(length);
     push local 1
     call Array.new 1
     pop local 0
+    // let i = 0;
     push constant 0
     pop local 2
+    // while (i < length)
 label Main_0
     push local 2
     push local 1
     lt
     not
     if-goto Main_1
+    // let a[i] = Keyboard.readInt("Enter a number: ");
     push local 2
     push local 0
     add
@@ -92,6 +98,7 @@ label Main_0
     pop pointer 1
     push temp 0
     pop that 0
+    // let sum = sum + a[i];
     push local 3
     push local 2
     push local 0
@@ -100,12 +107,14 @@ label Main_0
     push that 0
     add
     pop local 3
+    // let i = i + 1;
     push local 2
     push constant 1
     add
     pop local 2
     goto Main_0
 label Main_1
+    // do Output.printString("The average is ");
     push constant 15
     call String.new 1
     push constant 84
@@ -140,10 +149,12 @@ label Main_1
     call String.appendChar 2
     call Output.printString 1
     pop temp 0
+    // do Output.printInt(sum / length);
     push local 3
     push local 1
     call Math.divide 2
     call Output.printInt 1
     pop temp 0
+    // return;
     push constant 0
     return

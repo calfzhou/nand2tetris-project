@@ -1,17 +1,22 @@
+    // constructor PongGame new()
 function PongGame.new 0
     push constant 7
     call Memory.alloc 1
     pop pointer 0
+    // do Screen.clearScreen();
     call Screen.clearScreen 0
     pop temp 0
+    // let batWidth = 50;
     push constant 50
     pop this 6
+    // let bat = Bat.new(230, 229, batWidth, 7);
     push constant 230
     push constant 229
     push this 6
     push constant 7
     call Bat.new 4
     pop this 0
+    // let ball = Ball.new(253, 222, 0, 511, 0, 229);
     push constant 253
     push constant 222
     push constant 0
@@ -20,21 +25,25 @@ function PongGame.new 0
     push constant 229
     call Ball.new 6
     pop this 1
+    // do ball.setDestination(400,0);
     push this 1
     push constant 400
     push constant 0
     call Ball.setDestination 3
     pop temp 0
+    // do Screen.drawRectangle(0, 238, 511, 240);
     push constant 0
     push constant 238
     push constant 511
     push constant 240
     call Screen.drawRectangle 4
     pop temp 0
+    // do Output.moveCursor(22,0);
     push constant 22
     push constant 0
     call Output.moveCursor 2
     pop temp 0
+    // do Output.printString("Score: 0");
     push constant 8
     call String.new 1
     push constant 83
@@ -55,46 +64,64 @@ function PongGame.new 0
     call String.appendChar 2
     call Output.printString 1
     pop temp 0
+    // let exit = false;
     push constant 0
     pop this 3
+    // let score = 0;
     push constant 0
     pop this 4
+    // let wall = 0;
     push constant 0
     pop this 2
+    // let lastWall = 0;
     push constant 0
     pop this 5
+    // return this;
     push pointer 0
     return
+    // method void dispose()
 function PongGame.dispose 0
     push argument 0
     pop pointer 0
+    // do bat.dispose();
     push this 0
     call Bat.dispose 1
     pop temp 0
+    // do ball.dispose();
     push this 1
     call Ball.dispose 1
     pop temp 0
+    // do Memory.deAlloc(this);
     push pointer 0
     call Memory.deAlloc 1
     pop temp 0
+    // return;
     push constant 0
     return
+    // function void newInstance()
 function PongGame.newInstance 0
+    // let instance = PongGame.new();
     call PongGame.new 0
     pop static 0
+    // return;
     push constant 0
     return
+    // function PongGame getInstance()
 function PongGame.getInstance 0
+    // return instance;
     push static 0
     return
+    // method void run()
 function PongGame.run 1
     push argument 0
     pop pointer 0
+    // while (~exit)
 label PongGame_0
     push this 3
     not
     not
     if-goto PongGame_1
+    // while ((key = 0) & (~exit))
 label PongGame_2
     push local 0
     push constant 0
@@ -104,46 +131,56 @@ label PongGame_2
     and
     not
     if-goto PongGame_3
+    // let key = Keyboard.keyPressed();
     call Keyboard.keyPressed 0
     pop local 0
+    // do bat.move();
     push this 0
     call Bat.move 1
     pop temp 0
+    // do moveBall();
     push pointer 0
     call PongGame.moveBall 1
     pop temp 0
+    // do Sys.wait(50);
     push constant 50
     call Sys.wait 1
     pop temp 0
     goto PongGame_2
 label PongGame_3
+    // if (key = 130)
     push local 0
     push constant 130
     eq
     not
     if-goto PongGame_5
+    // do bat.setDirection(1);
     push this 0
     push constant 1
     call Bat.setDirection 2
     pop temp 0
     goto PongGame_4
 label PongGame_5
+    // if (key = 132)
     push local 0
     push constant 132
     eq
     not
     if-goto PongGame_7
+    // do bat.setDirection(2);
     push this 0
     push constant 2
     call Bat.setDirection 2
     pop temp 0
     goto PongGame_6
 label PongGame_7
+    // if (key = 140)
     push local 0
     push constant 140
     eq
     not
     if-goto PongGame_9
+    // let exit = true;
     push constant 1
     neg
     pop this 3
@@ -152,6 +189,7 @@ label PongGame_9
 label PongGame_8
 label PongGame_6
 label PongGame_4
+    // while ((~(key = 0)) & (~exit))
 label PongGame_10
     push local 0
     push constant 0
@@ -162,14 +200,18 @@ label PongGame_10
     and
     not
     if-goto PongGame_11
+    // let key = Keyboard.keyPressed();
     call Keyboard.keyPressed 0
     pop local 0
+    // do bat.move();
     push this 0
     call Bat.move 1
     pop temp 0
+    // do moveBall();
     push pointer 0
     call PongGame.moveBall 1
     pop temp 0
+    // do Sys.wait(50);
     push constant 50
     call Sys.wait 1
     pop temp 0
@@ -177,13 +219,16 @@ label PongGame_10
 label PongGame_11
     goto PongGame_0
 label PongGame_1
+    // if (exit)
     push this 3
     not
     if-goto PongGame_13
+    // do Output.moveCursor(10,27);
     push constant 10
     push constant 27
     call Output.moveCursor 2
     pop temp 0
+    // do Output.printString("Game Over");
     push constant 9
     call String.new 1
     push constant 71
@@ -209,14 +254,18 @@ label PongGame_1
     goto PongGame_12
 label PongGame_13
 label PongGame_12
+    // return;
     push constant 0
     return
+    // method void moveBall()
 function PongGame.moveBall 5
     push argument 0
     pop pointer 0
+    // let wall = ball.move();
     push this 1
     call Ball.move 1
     pop this 2
+    // if ((wall > 0) & (~(wall = lastWall)))
     push this 2
     push constant 0
     gt
@@ -227,27 +276,35 @@ function PongGame.moveBall 5
     and
     not
     if-goto PongGame_15
+    // let lastWall = wall;
     push this 2
     pop this 5
+    // let bouncingDirection = 0;
     push constant 0
     pop local 0
+    // let batLeft = bat.getLeft();
     push this 0
     call Bat.getLeft 1
     pop local 1
+    // let batRight = bat.getRight();
     push this 0
     call Bat.getRight 1
     pop local 2
+    // let ballLeft = ball.getLeft();
     push this 1
     call Ball.getLeft 1
     pop local 3
+    // let ballRight = ball.getRight();
     push this 1
     call Ball.getRight 1
     pop local 4
+    // if (wall = 4)
     push this 2
     push constant 4
     eq
     not
     if-goto PongGame_17
+    // let exit = (batLeft > ballRight) | (batRight < ballLeft);
     push local 1
     push local 4
     gt
@@ -256,10 +313,12 @@ function PongGame.moveBall 5
     lt
     or
     pop this 3
+    // if (~exit)
     push this 3
     not
     not
     if-goto PongGame_19
+    // if (ballRight < (batLeft + 10))
     push local 4
     push local 1
     push constant 10
@@ -267,11 +326,13 @@ function PongGame.moveBall 5
     lt
     not
     if-goto PongGame_21
+    // let bouncingDirection = -1;
     push constant 1
     neg
     pop local 0
     goto PongGame_20
 label PongGame_21
+    // if (ballLeft > (batRight - 10))
     push local 3
     push local 2
     push constant 10
@@ -279,28 +340,34 @@ label PongGame_21
     gt
     not
     if-goto PongGame_23
+    // let bouncingDirection = 1;
     push constant 1
     pop local 0
     goto PongGame_22
 label PongGame_23
 label PongGame_22
 label PongGame_20
+    // let batWidth = batWidth - 2;
     push this 6
     push constant 2
     sub
     pop this 6
+    // do bat.setWidth(batWidth);
     push this 0
     push this 6
     call Bat.setWidth 2
     pop temp 0
+    // let score = score + 1;
     push this 4
     push constant 1
     add
     pop this 4
+    // do Output.moveCursor(22,7);
     push constant 22
     push constant 7
     call Output.moveCursor 2
     pop temp 0
+    // do Output.printInt(score);
     push this 4
     call Output.printInt 1
     pop temp 0
@@ -310,6 +377,7 @@ label PongGame_18
     goto PongGame_16
 label PongGame_17
 label PongGame_16
+    // do ball.bounce(bouncingDirection);
     push this 1
     push local 0
     call Ball.bounce 2
@@ -317,5 +385,6 @@ label PongGame_16
     goto PongGame_14
 label PongGame_15
 label PongGame_14
+    // return;
     push constant 0
     return

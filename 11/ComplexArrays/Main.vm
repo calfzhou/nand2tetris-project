@@ -1,13 +1,18 @@
+    // function void main()
 function Main.main 3
+    // let a = Array.new(10);
     push constant 10
     call Array.new 1
     pop local 0
+    // let b = Array.new(5);
     push constant 5
     call Array.new 1
     pop local 1
+    // let c = Array.new(1);
     push constant 1
     call Array.new 1
     pop local 2
+    // let a[3] = 2;
     push constant 3
     push local 0
     add
@@ -16,6 +21,7 @@ function Main.main 3
     pop pointer 1
     push temp 0
     pop that 0
+    // let a[4] = 8;
     push constant 4
     push local 0
     add
@@ -24,6 +30,7 @@ function Main.main 3
     pop pointer 1
     push temp 0
     pop that 0
+    // let a[5] = 4;
     push constant 5
     push local 0
     add
@@ -32,6 +39,7 @@ function Main.main 3
     pop pointer 1
     push temp 0
     pop that 0
+    // let b[a[3]] = a[3] + 3;
     push constant 3
     push local 0
     add
@@ -50,6 +58,7 @@ function Main.main 3
     pop pointer 1
     push temp 0
     pop that 0
+    // let a[b[a[3]]] = a[a[5]] * b[((7 - a[3]) - Main.double(2)) + 1];
     push constant 3
     push local 0
     add
@@ -91,6 +100,7 @@ function Main.main 3
     pop pointer 1
     push temp 0
     pop that 0
+    // let c[0] = null;
     push constant 0
     push local 2
     add
@@ -99,12 +109,14 @@ function Main.main 3
     pop pointer 1
     push temp 0
     pop that 0
+    // let c = c[0];
     push constant 0
     push local 2
     add
     pop pointer 1
     push that 0
     pop local 2
+    // do Output.printString("Test 1: expected result: 5; actual result: ");
     push constant 43
     call String.new 1
     push constant 84
@@ -195,6 +207,7 @@ function Main.main 3
     call String.appendChar 2
     call Output.printString 1
     pop temp 0
+    // do Output.printInt(b[2]);
     push constant 2
     push local 1
     add
@@ -202,8 +215,10 @@ function Main.main 3
     push that 0
     call Output.printInt 1
     pop temp 0
+    // do Output.println();
     call Output.println 0
     pop temp 0
+    // do Output.printString("Test 2: expected result: 40; actual result: ");
     push constant 44
     call String.new 1
     push constant 84
@@ -296,6 +311,7 @@ function Main.main 3
     call String.appendChar 2
     call Output.printString 1
     pop temp 0
+    // do Output.printInt(a[5]);
     push constant 5
     push local 0
     add
@@ -303,8 +319,10 @@ function Main.main 3
     push that 0
     call Output.printInt 1
     pop temp 0
+    // do Output.println();
     call Output.println 0
     pop temp 0
+    // do Output.printString("Test 3: expected result: 0; actual result: ");
     push constant 43
     call String.new 1
     push constant 84
@@ -395,28 +413,35 @@ function Main.main 3
     call String.appendChar 2
     call Output.printString 1
     pop temp 0
+    // do Output.printInt(c);
     push local 2
     call Output.printInt 1
     pop temp 0
+    // do Output.println();
     call Output.println 0
     pop temp 0
+    // let c = null;
     push constant 0
     pop local 2
+    // if (c = null)
     push local 2
     push constant 0
     eq
     not
     if-goto Main_1
+    // do Main.fill(a, 10);
     push local 0
     push constant 10
     call Main.fill 2
     pop temp 0
+    // let c = a[3];
     push constant 3
     push local 0
     add
     pop pointer 1
     push that 0
     pop local 2
+    // let c[1] = 33;
     push constant 1
     push local 2
     add
@@ -425,12 +450,14 @@ function Main.main 3
     pop pointer 1
     push temp 0
     pop that 0
+    // let c = a[7];
     push constant 7
     push local 0
     add
     pop pointer 1
     push that 0
     pop local 2
+    // let c[1] = 77;
     push constant 1
     push local 2
     add
@@ -439,12 +466,14 @@ function Main.main 3
     pop pointer 1
     push temp 0
     pop that 0
+    // let b = a[3];
     push constant 3
     push local 0
     add
     pop pointer 1
     push that 0
     pop local 1
+    // let b[1] = b[1] + c[1];
     push constant 1
     push local 1
     add
@@ -466,6 +495,7 @@ function Main.main 3
     goto Main_0
 label Main_1
 label Main_0
+    // do Output.printString("Test 4: expected result: 77; actual result: ");
     push constant 44
     call String.new 1
     push constant 84
@@ -558,6 +588,7 @@ label Main_0
     call String.appendChar 2
     call Output.printString 1
     pop temp 0
+    // do Output.printInt(c[1]);
     push constant 1
     push local 2
     add
@@ -565,8 +596,10 @@ label Main_0
     push that 0
     call Output.printInt 1
     pop temp 0
+    // do Output.println();
     call Output.println 0
     pop temp 0
+    // do Output.printString("Test 5: expected result: 110; actual result: ");
     push constant 45
     call String.new 1
     push constant 84
@@ -661,6 +694,7 @@ label Main_0
     call String.appendChar 2
     call Output.printString 1
     pop temp 0
+    // do Output.printInt(b[1]);
     push constant 1
     push local 1
     add
@@ -668,26 +702,34 @@ label Main_0
     push that 0
     call Output.printInt 1
     pop temp 0
+    // do Output.println();
     call Output.println 0
     pop temp 0
+    // return;
     push constant 0
     return
+    // function int double(int a)
 function Main.double 0
+    // return a * 2;
     push argument 0
     push constant 2
     call Math.multiply 2
     return
+    // function void fill(Array a, int size)
 function Main.fill 0
+    // while (size > 0)
 label Main_2
     push argument 1
     push constant 0
     gt
     not
     if-goto Main_3
+    // let size = size - 1;
     push argument 1
     push constant 1
     sub
     pop argument 1
+    // let a[size] = Array.new(3);
     push argument 1
     push argument 0
     add
@@ -699,5 +741,6 @@ label Main_2
     pop that 0
     goto Main_2
 label Main_3
+    // return;
     push constant 0
     return

@@ -1,175 +1,215 @@
+    // constructor SquareGame new()
 function SquareGame.new 0
     push constant 2
     call Memory.alloc 1
     pop pointer 0
+    // let square = Square.new(0, 0, 30);
     push constant 0
     push constant 0
     push constant 30
     call Square.new 3
     pop this 0
+    // let direction = 0;
     push constant 0
     pop this 1
+    // return this;
     push pointer 0
     return
+    // method void dispose()
 function SquareGame.dispose 0
     push argument 0
     pop pointer 0
+    // do square.dispose();
     push this 0
     call Square.dispose 1
     pop temp 0
+    // do Memory.deAlloc(this);
     push pointer 0
     call Memory.deAlloc 1
     pop temp 0
+    // return;
     push constant 0
     return
+    // method void moveSquare()
 function SquareGame.moveSquare 0
     push argument 0
     pop pointer 0
+    // if (direction = 1)
     push this 1
     push constant 1
     eq
     not
     if-goto SquareGame_1
+    // do square.moveUp();
     push this 0
     call Square.moveUp 1
     pop temp 0
     goto SquareGame_0
 label SquareGame_1
 label SquareGame_0
+    // if (direction = 2)
     push this 1
     push constant 2
     eq
     not
     if-goto SquareGame_3
+    // do square.moveDown();
     push this 0
     call Square.moveDown 1
     pop temp 0
     goto SquareGame_2
 label SquareGame_3
 label SquareGame_2
+    // if (direction = 3)
     push this 1
     push constant 3
     eq
     not
     if-goto SquareGame_5
+    // do square.moveLeft();
     push this 0
     call Square.moveLeft 1
     pop temp 0
     goto SquareGame_4
 label SquareGame_5
 label SquareGame_4
+    // if (direction = 4)
     push this 1
     push constant 4
     eq
     not
     if-goto SquareGame_7
+    // do square.moveRight();
     push this 0
     call Square.moveRight 1
     pop temp 0
     goto SquareGame_6
 label SquareGame_7
 label SquareGame_6
+    // do Sys.wait(5);
     push constant 5
     call Sys.wait 1
     pop temp 0
+    // return;
     push constant 0
     return
+    // method void run()
 function SquareGame.run 2
     push argument 0
     pop pointer 0
+    // let exit = false;
     push constant 0
     pop local 1
+    // while (~exit)
 label SquareGame_8
     push local 1
     not
     not
     if-goto SquareGame_9
+    // while (key = 0)
 label SquareGame_10
     push local 0
     push constant 0
     eq
     not
     if-goto SquareGame_11
+    // let key = Keyboard.keyPressed();
     call Keyboard.keyPressed 0
     pop local 0
+    // do moveSquare();
     push pointer 0
     call SquareGame.moveSquare 1
     pop temp 0
     goto SquareGame_10
 label SquareGame_11
+    // if (key = 81)
     push local 0
     push constant 81
     eq
     not
     if-goto SquareGame_13
+    // let exit = true;
     push constant 1
     neg
     pop local 1
     goto SquareGame_12
 label SquareGame_13
 label SquareGame_12
+    // if (key = 90)
     push local 0
     push constant 90
     eq
     not
     if-goto SquareGame_15
+    // do square.decSize();
     push this 0
     call Square.decSize 1
     pop temp 0
     goto SquareGame_14
 label SquareGame_15
 label SquareGame_14
+    // if (key = 88)
     push local 0
     push constant 88
     eq
     not
     if-goto SquareGame_17
+    // do square.incSize();
     push this 0
     call Square.incSize 1
     pop temp 0
     goto SquareGame_16
 label SquareGame_17
 label SquareGame_16
+    // if (key = 131)
     push local 0
     push constant 131
     eq
     not
     if-goto SquareGame_19
+    // let direction = 1;
     push constant 1
     pop this 1
     goto SquareGame_18
 label SquareGame_19
 label SquareGame_18
+    // if (key = 133)
     push local 0
     push constant 133
     eq
     not
     if-goto SquareGame_21
+    // let direction = 2;
     push constant 2
     pop this 1
     goto SquareGame_20
 label SquareGame_21
 label SquareGame_20
+    // if (key = 130)
     push local 0
     push constant 130
     eq
     not
     if-goto SquareGame_23
+    // let direction = 3;
     push constant 3
     pop this 1
     goto SquareGame_22
 label SquareGame_23
 label SquareGame_22
+    // if (key = 132)
     push local 0
     push constant 132
     eq
     not
     if-goto SquareGame_25
+    // let direction = 4;
     push constant 4
     pop this 1
     goto SquareGame_24
 label SquareGame_25
 label SquareGame_24
+    // while (~(key = 0))
 label SquareGame_26
     push local 0
     push constant 0
@@ -177,8 +217,10 @@ label SquareGame_26
     not
     not
     if-goto SquareGame_27
+    // let key = Keyboard.keyPressed();
     call Keyboard.keyPressed 0
     pop local 0
+    // do moveSquare();
     push pointer 0
     call SquareGame.moveSquare 1
     pop temp 0
@@ -186,5 +228,6 @@ label SquareGame_26
 label SquareGame_27
     goto SquareGame_8
 label SquareGame_9
+    // return;
     push constant 0
     return

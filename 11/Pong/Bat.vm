@@ -1,56 +1,77 @@
+    // constructor Bat new(int Ax, int Ay, int Awidth, int Aheight)
 function Bat.new 0
     push constant 5
     call Memory.alloc 1
     pop pointer 0
+    // let x = Ax;
     push argument 0
     pop this 0
+    // let y = Ay;
     push argument 1
     pop this 1
+    // let width = Awidth;
     push argument 2
     pop this 2
+    // let height = Aheight;
     push argument 3
     pop this 3
+    // let direction = 2;
     push constant 2
     pop this 4
+    // do show();
     push pointer 0
     call Bat.show 1
     pop temp 0
+    // return this;
     push pointer 0
     return
+    // method void dispose()
 function Bat.dispose 0
     push argument 0
     pop pointer 0
+    // do Memory.deAlloc(this);
     push pointer 0
     call Memory.deAlloc 1
     pop temp 0
+    // return;
     push constant 0
     return
+    // method void show()
 function Bat.show 0
     push argument 0
     pop pointer 0
+    // do Screen.setColor(true);
     push constant 1
     neg
     call Screen.setColor 1
     pop temp 0
+    // do draw();
     push pointer 0
     call Bat.draw 1
     pop temp 0
+    // return;
     push constant 0
     return
+    // method void hide()
 function Bat.hide 0
     push argument 0
     pop pointer 0
+    // do Screen.setColor(false);
     push constant 0
     call Screen.setColor 1
     pop temp 0
+    // do draw();
     push pointer 0
     call Bat.draw 1
     pop temp 0
+    // return;
     push constant 0
     return
+    // method void draw()
 function Bat.draw 0
     push argument 0
     pop pointer 0
+    // do Screen.drawRectangle(x, y, x + width, y + height);
     push this 0
     push this 1
     push this 0
@@ -61,65 +82,85 @@ function Bat.draw 0
     add
     call Screen.drawRectangle 4
     pop temp 0
+    // return;
     push constant 0
     return
+    // method void setDirection(int Adirection)
 function Bat.setDirection 0
     push argument 0
     pop pointer 0
+    // let direction = Adirection;
     push argument 1
     pop this 4
+    // return;
     push constant 0
     return
+    // method int getLeft()
 function Bat.getLeft 0
     push argument 0
     pop pointer 0
+    // return x;
     push this 0
     return
+    // method int getRight()
 function Bat.getRight 0
     push argument 0
     pop pointer 0
+    // return x + width;
     push this 0
     push this 2
     add
     return
+    // method void setWidth(int Awidth)
 function Bat.setWidth 0
     push argument 0
     pop pointer 0
+    // do hide();
     push pointer 0
     call Bat.hide 1
     pop temp 0
+    // let width = Awidth;
     push argument 1
     pop this 2
+    // do show();
     push pointer 0
     call Bat.show 1
     pop temp 0
+    // return;
     push constant 0
     return
+    // method void move()
 function Bat.move 0
     push argument 0
     pop pointer 0
+    // if (direction = 1)
     push this 4
     push constant 1
     eq
     not
     if-goto Bat_1
+    // let x = x - 4;
     push this 0
     push constant 4
     sub
     pop this 0
+    // if (x < 0)
     push this 0
     push constant 0
     lt
     not
     if-goto Bat_3
+    // let x = 0;
     push constant 0
     pop this 0
     goto Bat_2
 label Bat_3
 label Bat_2
+    // do Screen.setColor(false);
     push constant 0
     call Screen.setColor 1
     pop temp 0
+    // do Screen.drawRectangle((x + width) + 1, y, (x + width) + 4, y + height);
     push this 0
     push this 2
     add
@@ -136,10 +177,12 @@ label Bat_2
     add
     call Screen.drawRectangle 4
     pop temp 0
+    // do Screen.setColor(true);
     push constant 1
     neg
     call Screen.setColor 1
     pop temp 0
+    // do Screen.drawRectangle(x, y, x + 3, y + height);
     push this 0
     push this 1
     push this 0
@@ -152,10 +195,12 @@ label Bat_2
     pop temp 0
     goto Bat_0
 label Bat_1
+    // let x = x + 4;
     push this 0
     push constant 4
     add
     pop this 0
+    // if ((x + width) > 511)
     push this 0
     push this 2
     add
@@ -163,6 +208,7 @@ label Bat_1
     gt
     not
     if-goto Bat_5
+    // let x = 511 - width;
     push constant 511
     push this 2
     sub
@@ -170,9 +216,11 @@ label Bat_1
     goto Bat_4
 label Bat_5
 label Bat_4
+    // do Screen.setColor(false);
     push constant 0
     call Screen.setColor 1
     pop temp 0
+    // do Screen.drawRectangle(x - 4, y, x - 1, y + height);
     push this 0
     push constant 4
     sub
@@ -185,10 +233,12 @@ label Bat_4
     add
     call Screen.drawRectangle 4
     pop temp 0
+    // do Screen.setColor(true);
     push constant 1
     neg
     call Screen.setColor 1
     pop temp 0
+    // do Screen.drawRectangle((x + width) - 3, y, x + width, y + height);
     push this 0
     push this 2
     add
@@ -204,5 +254,6 @@ label Bat_4
     call Screen.drawRectangle 4
     pop temp 0
 label Bat_0
+    // return;
     push constant 0
     return

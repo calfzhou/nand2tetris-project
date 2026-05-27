@@ -1,4 +1,6 @@
+    // function void main()
 function Main.main 0
+    // do Output.printInt(1 + (2 * 3));
     push constant 1
     push constant 2
     push constant 3
@@ -6,5 +8,6 @@ function Main.main 0
     add
     call Output.printInt 1
     pop temp 0
+    // return;
     push constant 0
     return
